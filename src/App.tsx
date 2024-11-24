@@ -1,24 +1,46 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useRef } from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import { Scatter } from "react-chartjs-2";
+import { Chart, registerables } from "chart.js";
+
+Chart.register(...registerables);
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Scatter
+        data={{
+          labels: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+          datasets: [
+            {
+              label: "Hours worked",
+              data: [
+                {
+                  x: 1,
+                  y: 1,
+                },
+                {
+                  x: 2,
+                  y: 2,
+                },
+                {
+                  x: 3,
+                  y: 3,
+                },
+                {
+                  x: 4,
+                  y: 4,
+                },
+                {
+                  x: 5,
+                  y: 5,
+                },
+              ],
+            },
+          ],
+        }}
+      />
     </div>
   );
 }
