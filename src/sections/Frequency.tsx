@@ -39,6 +39,7 @@ export const Frequency = () => {
       };
     
     return <section>
+        <h3>Times sung by song</h3>
         <input type="checkbox" checked={sortByFrequency} onChange={event => {
             if (event.currentTarget.checked) {
                 setSortByFrequency(true);
