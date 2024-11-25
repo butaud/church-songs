@@ -1,6 +1,5 @@
 import "./App.css";
 import {
-  CartesianGrid,
   Cell,
   ResponsiveContainer,
   Scatter,
@@ -33,7 +32,7 @@ const COLORS = {
 };
 
 const isPsalm = (songNumber: number | string | null) => {
-  return (typeof(songNumber) === "number" && songNumber <= 300);
+  return (typeof (songNumber) === "number" && songNumber <= 300);
 }
 
 function App() {
@@ -58,46 +57,46 @@ function App() {
       <h1>Songs sung by Emmanuel since March 21, 2021</h1>
       <p>
         The color of the dot indicates whether it had been sung before in this time period.
-        </p>
-        <div className="legend">
+      </p>
+      <div className="legend">
         <ul>
           <li className="hymn new">Hymn, first time</li>
           <li className="hymn seen">Hymn, sung before</li>
-          </ul>
-          <ul>
+        </ul>
+        <ul>
           <li className="psalm new">Psalm, new</li>
           <li className="psalm seen">Psalm, sung before</li>
         </ul>
-        </div>
-        <ResponsiveContainer height={500}>
-          <ScatterChart data={songs}>
-            <Scatter dataKey="praise_song" isAnimationActive={false}>
-              {songColorer("praise_song")}
-            </Scatter>
-            <Scatter dataKey="confession_song" isAnimationActive={false}>
-              {songColorer("confession_song")}
-            </Scatter>
-            <Scatter dataKey="assurance_song" isAnimationActive={false}>
-              {songColorer("assurance_song")}
-            </Scatter>
-            <Scatter dataKey="offertory_song" isAnimationActive={false}>
-              {songColorer("offertory_song")}
-            </Scatter>
-            <Scatter dataKey="bread_song" isAnimationActive={false}>
-              {songColorer("bread_song")}
-            </Scatter>
-            <Scatter dataKey="wine_song" isAnimationActive={false}>
-              {songColorer("wine_song")}
-            </Scatter>
-            <XAxis dataKey="date" />
-            <YAxis
-              ticks={[100, 200, 300, 400, 500, 600, 700]}
-            />
-            <Tooltip />
-          </ScatterChart>
-        </ResponsiveContainer>
-        {isPortrait && <p>(Landscape orientation recommended for better viewing.)</p>}
-        <p>Note: Starting date chosen because it was the week we changed over to the 2020 Cantus numbering.</p>
+      </div>
+      <ResponsiveContainer height={500}>
+        <ScatterChart data={songs}>
+          <Scatter dataKey="praise_song" isAnimationActive={false}>
+            {songColorer("praise_song")}
+          </Scatter>
+          <Scatter dataKey="confession_song" isAnimationActive={false}>
+            {songColorer("confession_song")}
+          </Scatter>
+          <Scatter dataKey="assurance_song" isAnimationActive={false}>
+            {songColorer("assurance_song")}
+          </Scatter>
+          <Scatter dataKey="offertory_song" isAnimationActive={false}>
+            {songColorer("offertory_song")}
+          </Scatter>
+          <Scatter dataKey="bread_song" isAnimationActive={false}>
+            {songColorer("bread_song")}
+          </Scatter>
+          <Scatter dataKey="wine_song" isAnimationActive={false}>
+            {songColorer("wine_song")}
+          </Scatter>
+          <XAxis dataKey="date" />
+          <YAxis
+            ticks={[100, 200, 300, 400, 500, 600, 700]}
+          />
+          <Tooltip />
+        </ScatterChart>
+      </ResponsiveContainer>
+      {isPortrait && <p>(Landscape orientation recommended for better viewing.)</p>}
+      <p>Note: Starting date chosen because it was the week we changed over to the 2020 Cantus numbering.</p>
     </div>
   );
 }
