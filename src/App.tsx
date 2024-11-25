@@ -25,28 +25,51 @@ songs.forEach((week, index) => {
   seenByIndex.push(current);
 });
 
+const COLORS = {
+  PSALM_NEW: "hsl(0 68% 50%)",
+  PSALM_SEEN: "hsl(0 40% 75%)",
+  HYMN_NEW: "hsl(234 46.7% 50%)",
+  HYMN_SEEN: "hsl(234 35% 75%)"
+};
+
+const isPsalm = (songNumber: number | string | null) => {
+  return (typeof(songNumber) === "number" && songNumber <= 300);
+}
+
 function App() {
   const songColorer = (song: keyof (typeof songs)[0]) => {
     return songs.map((entry, index) => {
       const seen = seenByIndex[index - 1] ?? new Set();
       const currentSong = entry[song];
-      const color = seen.has(currentSong) ? "gray" : "green";
+      let color = "";
+      if (seen.has(currentSong)) {
+        color = isPsalm(currentSong) ? COLORS.PSALM_SEEN : COLORS.HYMN_SEEN;
+      } else {
+        color = isPsalm(currentSong) ? COLORS.PSALM_NEW : COLORS.HYMN_NEW;
+      }
       return <Cell key={`cell-${index}`} fill={color} />;
     });
   };
+
+  const isPortrait = document.documentElement.clientWidth < document.documentElement.clientHeight;
 
   return (
     <div className="App">
       <h1>Songs sung by Emmanuel since March 21, 2021</h1>
       <p>
-        The color of the dots represents the first time a song was sung.
+        The color of the dot indicates whether it had been sung before in this time period.
+        </p>
+        <div className="legend">
         <ul>
-          <li className="new">First time (during this period)</li>
-          <li className="seen">Sung before</li>
+          <li className="hymn new">Hymn, first time</li>
+          <li className="hymn seen">Hymn, sung before</li>
+          </ul>
+          <ul>
+          <li className="psalm new">Psalm, new</li>
+          <li className="psalm seen">Psalm, sung before</li>
         </ul>
-      </p>
-      <div className="chart">
-        <ResponsiveContainer minWidth={800} height={500}>
+        </div>
+        <ResponsiveContainer height={500}>
           <ScatterChart data={songs}>
             <Scatter dataKey="praise_song" isAnimationActive={false}>
               {songColorer("praise_song")}
@@ -68,16 +91,13 @@ function App() {
             </Scatter>
             <XAxis dataKey="date" />
             <YAxis
-              ticks={[300]}
-              tickFormatter={(value) => {
-                return "Hymns ^ v Psalms";
-              }}
+              ticks={[100, 200, 300, 400, 500, 600, 700]}
             />
             <Tooltip />
-            <CartesianGrid syncWithTicks vertical={false} />
           </ScatterChart>
         </ResponsiveContainer>
-      </div>
+        {isPortrait && <p>(Landscape orientation recommended for better viewing.)</p>}
+        <p>Note: Starting date chosen because it was the week we changed over to the 2020 Cantus numbering.</p>
     </div>
   );
 }

@@ -2,9 +2,13 @@
   margin: 20px;
   text-align: center;
 
+  .legend {
+    display: flex;
+    flex-direction: row;
+  }
+
   ul {
-    margin: 10px auto;
-    width: 400px;
+    margin: 0 auto;
     li {
       width: fit-content;
       line-height: 1.5;
@@ -14,16 +18,20 @@
       font-size: 1.5em;
     }
 
-    li.seen::marker {
-      color: gray;
+    li.new.hymn::marker {
+      color: hsl(234 46.7% 50%);
     }
 
-    li.new::marker {
-      color: green;
+    li.seen.hymn::marker {
+      color: hsl(234 35% 75%);
     }
-  }
 
-  .chart {
-    overflow-x: auto;
+    li.new.psalm::marker {
+      color: hsl(0 68% 50%);
+    }
+
+    li.seen.psalm::marker {
+      color: hsl(0 40% 75%);
+    }
   }
 }
