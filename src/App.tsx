@@ -2,7 +2,6 @@ import "./App.css";
 import {
   CartesianGrid,
   Cell,
-  Label,
   ResponsiveContainer,
   Scatter,
   ScatterChart,
@@ -12,14 +11,26 @@ import {
 } from "recharts";
 import songs from "./songs.json";
 
-function App() {
-  const seen = new Set<number | string | null>();
+const seenByIndex = new Array<Set<number | string | null>>();
+songs.forEach((week, index) => {
+  const prev: Set<number | string | null> =
+    index === 0 ? new Set() : seenByIndex[index - 1];
+  const current = new Set(prev);
+  current.add(week.praise_song);
+  current.add(week.confession_song);
+  current.add(week.assurance_song);
+  current.add(week.offertory_song);
+  current.add(week.bread_song);
+  current.add(week.wine_song);
+  seenByIndex.push(current);
+});
 
+function App() {
   const songColorer = (song: keyof (typeof songs)[0]) => {
     return songs.map((entry, index) => {
+      const seen = seenByIndex[index - 1] ?? new Set();
       const currentSong = entry[song];
       const color = seen.has(currentSong) ? "gray" : "green";
-      seen.add(currentSong);
       return <Cell key={`cell-${index}`} fill={color} />;
     });
   };
@@ -41,7 +52,6 @@ function App() {
               {songColorer("praise_song")}
             </Scatter>
             <Scatter dataKey="confession_song" isAnimationActive={false}>
-              <Label value="Confession" />
               {songColorer("confession_song")}
             </Scatter>
             <Scatter dataKey="assurance_song" isAnimationActive={false}>
