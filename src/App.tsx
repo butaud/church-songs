@@ -96,9 +96,25 @@ function App() {
         </ScatterChart>
       </ResponsiveContainer>
       {isPortrait && <p>(Landscape orientation recommended for better viewing.)</p>}
+      <Statistics />
       <p>Note: Starting date chosen because it was the week we changed over to the 2020 Cantus numbering.</p>
     </div>
   );
 }
+
+const Statistics = () => {
+  const lastSeen = Array.from(seenByIndex[seenByIndex.length - 1]);
+  const seenPsalms = lastSeen.filter(isPsalm).length;
+  const seenHymns = lastSeen.length - seenPsalms;
+
+  return <div>
+    <h3>Unique songs</h3>
+    <div className="stats">
+      <p className="hymns">Hymns: {seenHymns}</p>
+      <p className="psalms">Psalms: {seenPsalms}</p>
+      <p>Total: {lastSeen.length}</p>
+    </div>
+  </div>;
+};
 
 export default App;

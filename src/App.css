@@ -34,4 +34,18 @@
       color: hsl(0 40% 75%);
     }
   }
+
+  .stats {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+
+    .hymns {
+      color: hsl(234 46.7% 50%);
+    }
+
+    .psalms {
+      color: hsl(0 68% 50%);
+    }
+  }
 }
