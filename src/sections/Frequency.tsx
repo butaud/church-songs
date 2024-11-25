@@ -13,7 +13,7 @@ const frequencyData = lastSeen
         }, 0);
         console.log(timesSung);
         return {
-            song: songNumber,
+            song: songNumber as number,
             timesSung
         };
     });
@@ -27,7 +27,7 @@ export const Frequency = () => {
         if (sortByFrequency) {
             return frequencyData.sort((a, b) => b.timesSung - a.timesSung)
         } else {
-            return frequencyData.sort((a, b) => a.song ?? 0 - b.song ?? 0);
+            return frequencyData.sort((a, b) => a.song - b.song);
         }
     }, [sortByFrequency]);
 
