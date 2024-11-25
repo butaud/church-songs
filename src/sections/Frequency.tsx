@@ -27,7 +27,7 @@ export const Frequency = () => {
         if (sortByFrequency) {
             return frequencyData.sort((a, b) => b.timesSung - a.timesSung)
         } else {
-            return frequencyData.sort((a, b) => a.song - b.song);
+            return frequencyData.sort((a, b) => a.song ?? 0 - b.song ?? 0);
         }
     }, [sortByFrequency]);
 
