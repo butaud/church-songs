@@ -34,38 +34,40 @@ function App() {
           <li className="seen">Sung before</li>
         </ul>
       </p>
-      <ResponsiveContainer minWidth={800} height={400}>
-        <ScatterChart data={songs}>
-          <Scatter dataKey="praise_song" isAnimationActive={false}>
-            {songColorer("praise_song")}
-          </Scatter>
-          <Scatter dataKey="confession_song" isAnimationActive={false}>
-            <Label value="Confession" />
-            {songColorer("confession_song")}
-          </Scatter>
-          <Scatter dataKey="assurance_song" isAnimationActive={false}>
-            {songColorer("assurance_song")}
-          </Scatter>
-          <Scatter dataKey="offertory_song" isAnimationActive={false}>
-            {songColorer("offertory_song")}
-          </Scatter>
-          <Scatter dataKey="bread_song" isAnimationActive={false}>
-            {songColorer("bread_song")}
-          </Scatter>
-          <Scatter dataKey="wine_song" isAnimationActive={false}>
-            {songColorer("wine_song")}
-          </Scatter>
-          <XAxis dataKey="date" />
-          <YAxis
-            ticks={[300]}
-            tickFormatter={(value) => {
-              return "Hymns ^ v Psalms";
-            }}
-          />
-          <Tooltip />
-          <CartesianGrid syncWithTicks vertical={false} />
-        </ScatterChart>
-      </ResponsiveContainer>
+      <div className="chart">
+        <ResponsiveContainer minWidth={800} height={500}>
+          <ScatterChart data={songs}>
+            <Scatter dataKey="praise_song" isAnimationActive={false}>
+              {songColorer("praise_song")}
+            </Scatter>
+            <Scatter dataKey="confession_song" isAnimationActive={false}>
+              <Label value="Confession" />
+              {songColorer("confession_song")}
+            </Scatter>
+            <Scatter dataKey="assurance_song" isAnimationActive={false}>
+              {songColorer("assurance_song")}
+            </Scatter>
+            <Scatter dataKey="offertory_song" isAnimationActive={false}>
+              {songColorer("offertory_song")}
+            </Scatter>
+            <Scatter dataKey="bread_song" isAnimationActive={false}>
+              {songColorer("bread_song")}
+            </Scatter>
+            <Scatter dataKey="wine_song" isAnimationActive={false}>
+              {songColorer("wine_song")}
+            </Scatter>
+            <XAxis dataKey="date" />
+            <YAxis
+              ticks={[300]}
+              tickFormatter={(value) => {
+                return "Hymns ^ v Psalms";
+              }}
+            />
+            <Tooltip />
+            <CartesianGrid syncWithTicks vertical={false} />
+          </ScatterChart>
+        </ResponsiveContainer>
+      </div>
     </div>
   );
 }
